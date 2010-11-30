@@ -8,6 +8,6 @@ app.post '#/login', (context) ->
     success: (token) ->
       window.token = token
       localStorage.setItem('token', token)
-      context.redirect('#/recipes')
+      context.redirect('#/')
     error: (message) ->
       alert(message)
