@@ -22,4 +22,4 @@ $.fn.quickClick = (callback) ->
       
       unless moved
         e.preventDefault()
-        callback(e)
+        callback.call(el, e)
