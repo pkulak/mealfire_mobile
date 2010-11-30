@@ -25,7 +25,7 @@ window.Header.setTitle = (title, back) ->
     Header.addButton
       text: 'Back'
       className: 'back-button'
-      click: -> window.location = back if back
+      click: -> window.location = back
 
 window.Header.addButton = (button) ->
   b = $('<a href="#"></a>').addClass(button.className || 'button')
