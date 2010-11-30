@@ -51,6 +51,9 @@ window.Header.addDropdown = (buttons) ->
         dropdown.remove()
         button.click()
         e.stopPropagation()
+        
+        # Get rid of the quickClick binding
+        $(document).unbind 'touchstart'
               
       dropdown.append(li)
       
