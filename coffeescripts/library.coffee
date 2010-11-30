@@ -39,6 +39,9 @@ window.Header.addButton = (button) ->
 
 window.Header.addDropdown = (buttons) ->
   Header.addButton className: 'more-button', click: ->
+    if $('ul.dropdown').length
+      return $('ul.dropdown').remove()
+    
     dropdown = $('<ul class="dropdown"></ul>')
       
     $(document).quickClick -> dropdown.remove()
