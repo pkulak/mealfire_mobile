@@ -100,7 +100,7 @@ input[type="submit"] {
   font-family: inherit;
   font-size: 12px;
   font-weight: bold;
-  color: #eee;
+  color: #f5f5f5;
   text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 0;
   text-overflow: ellipsis;
   text-decoration: none;
