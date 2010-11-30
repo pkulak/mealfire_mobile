@@ -1,0 +1,6 @@
+<form action="#/add_extra" method="post">
+  <ul>
+    <li><input type="text" name="item"></li>
+  </ul>
+  <input type="submit" value="Submit">
+</form>

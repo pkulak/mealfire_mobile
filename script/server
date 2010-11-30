@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+
+import SimpleHTTPServer
+import SocketServer
+
+httpd = SocketServer.TCPServer(("", 8000), SimpleHTTPServer.SimpleHTTPRequestHandler)
+httpd.serve_forever()

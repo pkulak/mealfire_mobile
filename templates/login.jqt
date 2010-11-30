@@ -1,0 +1,7 @@
+<form action="#/login" method="post">
+  <ul>
+    <li><input type="text" name="email" placeholder="Email Address"></li>
+    <li><input type="password" name="password" placeholder="Password"></li>
+  </ul>
+  <input type="submit" value="Submit">
+</form>

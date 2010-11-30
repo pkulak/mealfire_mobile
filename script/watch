@@ -1,0 +1,24 @@
+#!/usr/bin/env coffee
+
+fs     = require('fs')
+exec   = require('child_process').exec
+coffee = require('coffee-script')
+
+compile = ->
+  exec 'find ./coffeescripts | grep "\.coffee$"', (error, stdout, stderr) ->
+    js = "/* DON'T EDIT THIS FILE! */\n\n"
+     
+    stdout.trim().split("\n").sort().forEach (file) ->
+      cof = fs.readFileSync(file).toString()
+      js += "/* #{file} */\n\n" + coffee.compile(cof) + "\n"
+
+    fs.writeFile('javascripts/mobile.js', js)
+
+exec 'find ./coffeescripts | grep "\.coffee$"', (error, stdout, stderr) ->
+  stdout.trim().split("\n").forEach (file) ->
+    fs.watchFile file, {persistent: true, interval: 500}, (curr, prev) ->
+      return if curr.size is prev.size and curr.mtime.getTime() is prev.mtime.getTime()
+      process.stdout.write "Compiling #{file}\n"
+      compile()
+
+compile()
