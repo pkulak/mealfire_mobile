@@ -227,3 +227,19 @@ li.sub-heading {
 img.edit {
   float: right;
 }
+
+table.home {
+  width: 100%;
+  margin-top: 10px;
+}
+
+table.home td {
+  text-align: center;
+}
+
+table.home td p {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}

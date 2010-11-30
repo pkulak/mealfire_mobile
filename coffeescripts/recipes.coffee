@@ -41,7 +41,7 @@ appendRecipes = ->
           window.location = "#/recipe/#{$(this).data('recipe-id')}"
 
 reset = ->
-  Header.setTitle "Recipes"
+  Header.setTitle "Recipes", "/#/"
   Header.addButton text: "Search", click: -> search(context)
 
 clear = ->

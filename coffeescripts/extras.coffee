@@ -3,7 +3,7 @@ app.get '#/extras', (context) ->
   Header.loading()
   
   callAPI 'me/extra_items', success: (categories) ->
-    Header.setTitle("Extras")
+    Header.setTitle("Extras", "/#/")
     Header.addButton text: "Add", click: -> window.location = '#/add_extra'
     
     menu = []
