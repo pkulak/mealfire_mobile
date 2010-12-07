@@ -1,6 +1,5 @@
 app.get '#/recipe/:id', (context) ->
   context.app.swap('')
-  Header.loading()
   data = {include: 'ingredient_groups[ingredients],directions'}
 
   callAPI "me/recipes/#{context.params.id}", data: data, success: (recipe) ->

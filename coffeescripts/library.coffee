@@ -1,22 +1,29 @@
 window.callAPI = (path, options) ->
+  # Show the "Loading..." header.
+  backButton = $('#app-header').find('a.back-button')
+  $('#app-header').hide();
+  
+  $(document.body).prepend(
+    $('<header id="app-loading-header"><h1>Loading...</h1></header>'))
+
   if window.token
     options.data = $.extend options.data || {}, token: window.token
 
-  $.ajax
-    url: "http://mealfire.com/api/v2/#{path}.jsonp?callback=?"
+  ajax = $.ajax
+    url: "http://localhost:7000/api/v2/#{path}.jsonp?callback=?"
     dataType: 'jsonp'
     data: options.data
     success: (data) ->
+      # Put back the normal header.
+      $('#app-loading-header').remove()
+      $('#app-header').show();
+         
       if !data[0]
-        alert data[1]
         options.error(data[1]) if options.error
       else
         options.success(data[1]) if options.success
 
 window.Header = {}
-
-window.Header.loading = ->
-  $('#app-header').html $('<h1></h1>').text('Loading...')
   
 window.Header.setTitle = (title, back) ->
   $('#app-header').html $('<h1></h1>').text(title)

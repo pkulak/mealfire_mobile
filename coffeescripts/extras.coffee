@@ -1,6 +1,5 @@
 app.get '#/extras', (context) ->
   context.app.swap('')
-  Header.loading()
   
   callAPI 'me/extra_items', success: (categories) ->
     Header.setTitle("Extras", "/#/")
