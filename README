@@ -7,3 +7,7 @@ http://jashkenas.github.com/coffee-script/
 Then run ./script/server and ./script/watch on two terminals and navigate in your browser to
 
 http://localhost:8000
+
+It's currently running here:
+
+http://m.mealfire.com
