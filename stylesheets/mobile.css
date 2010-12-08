@@ -228,18 +228,22 @@ img.edit {
   float: right;
 }
 
-table.home {
-  width: 100%;
-  margin-top: 10px;
-}
-
-table.home td {
+div.home-tile {
+  width: 50%;
+  float: left;
   text-align: center;
+  margin: 15px 0;
 }
 
-table.home td p {
+div.home-tile p {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
   color: #333;
+}
+
+li.deleted {
+  background-image: url('/images/check_mark.png');
+  background-repeat: no-repeat;
+  background-position: right 10px;
 }

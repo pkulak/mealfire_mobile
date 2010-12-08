@@ -1,11 +1,12 @@
-<table class="home">
-  <tr>
-    <td data-location="/#/recipes">
-      <img src="/images/icons/recipes.png">
-      <p>Recipes</p>
-    </td><td data-location="/#/extras">
-      <img src="/images/icons/extras.png">
-      <p>Extras</p>
-    </td>
-  </tr>
-</table>
+<div class="home-tile" data-location="/#/recipes">
+  <img src="/images/icons/recipes.png">
+  <p>Recipes</p>
+</div>
+<div class="home-tile" data-location="/#/extras">
+  <img src="/images/icons/extras.png">
+  <p>Extras</p>
+</div>
+<div class="home-tile" data-location="/#/lists">
+  <img src="/images/icons/lists.png">
+  <p>Shopping Lists</p>
+</div>
