@@ -10,3 +10,7 @@
   <img src="/images/icons/lists.png">
   <p>Shopping Lists</p>
 </div>
+<div class="home-tile" data-location="/#/calendar">
+  <img src="/images/icons/calendar.png">
+  <p>Calendar</p>
+</div>

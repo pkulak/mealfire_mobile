@@ -8,6 +8,6 @@ app.get '#/lists', (context) ->
       ul = context.$element().find('ul')
       
       $.each lists, (i, list) ->
-        li = $('<li></li>').text(formatDate(list.created_at))
+        li = $('<li></li>').text(formatTime(list.created_at))
         ul.append(li)
         li.quickClick -> window.location = "/#/list/#{list.id}"

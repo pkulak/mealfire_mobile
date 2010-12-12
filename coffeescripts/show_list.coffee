@@ -12,12 +12,12 @@ app.get '#/list/:id', (context) ->
     $.each categories, (i, category) ->
       ul.append($('<li class="sub-heading"/>').text(category.name))
       $.each category.items, (i, item) ->
-        li = $('<li/>').data('id', item.id).text(item.string)
+        li = $('<li class="checkable"/>').data('id', item.id).text(item.string)
         ul.append(li)
         li.quickClick ->
-          if $(this).hasClass("deleted")
-            $(this).removeClass("deleted")
+          if $(this).hasClass("checked")
+            $(this).removeClass("checked")
           else
-            $(this).addClass("deleted")
+            $(this).addClass("checked")
     
     context.app.swap(ul)

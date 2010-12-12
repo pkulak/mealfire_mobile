@@ -245,7 +245,11 @@ div.home-tile p {
   color: #333;
 }
 
-li.deleted {
+li.checkable {
+  padding-right: 35px;
+}
+
+li.checked {
   background-image: url('/images/check_mark.png');
   background-repeat: no-repeat;
   background-position: right 10px;

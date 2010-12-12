@@ -25,12 +25,20 @@ window.callAPI = (path, options) ->
         options.success(data[1]) if options.success
 
 window.Header = {}
-  
+backLocation = null
+
+window.Header.addBackLocation = (loc) ->
+  backLocation = loc
+
 window.Header.setTitle = (title, back) ->
   $('#app-loading-header').remove()
   $('#app-header').show();
 
   $('#app-header').html $('<h1></h1>').text(title)
+  
+  if backLocation
+    back = backLocation
+    backLocation = null
   
   if back
     Header.addButton
@@ -93,14 +101,53 @@ window.watchForEnter = (elements, enter) ->
       elements.blur()
       enter()
 
+# My own, special parseInt
+pi = (s) ->
+  s = s.replace(/^0*/, '')
+  return 0 if s == ''
+  parseInt(s)
+
+getMidnight = (ago) ->
+  today = new Date()
+  new Date(today.getFullYear(), today.getMonth(), today.getDate() - ago)
+
 window.formatDate = (d) ->
   if typeof d == 'string'
-    # My own, special parseInt
-    pi = (s) ->
-      s = s.replace(/^0*/, '')
-      return 0 if s == ''
-      parseInt(s)
-    
+    regex = /(\d\d\d\d)-(\d\d)-(\d\d)/
+    m = regex.exec(d)
+    d = new Date(pi(m[1]), pi(m[2]) - 1, pi(m[3]))
+  
+  days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  
+  if d < getMidnight(0)
+    if d > getMidnight(1)
+      return "Yesterday"
+    if d > getMidnight(2)
+      return "Two Days Ago"
+    if d > getMidnight(7)
+      return "Last #{days[d.getDay()]}"
+  else if d < getMidnight(-1)
+    return "Today"
+  else if d < getMidnight(-2)
+    return "Tomorrow"
+  else if d < getMidnight(-7)
+    return days[d.getDay()]
+
+  months = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec']
+  numbers = ['th','st','nd','rd','th','th','th','th','th','th']
+  day = d.getDate()
+  month = months[d.getMonth()]
+
+  if 10 <= day <= 20
+    day = day + 'th'
+  else
+    day = day + numbers[(day % 10)]
+
+  "#{month} #{day}, #{d.getYear() + 1900}"
+
+# No support for future dates.
+window.formatTime = (d) ->
+  if typeof d == 'string'
     regex = /(\d\d\d\d)-(\d\d)-(\d\d)T(\d\d):(\d\d):(\d\d)(-|\+)(\d\d):(\d\d)/
     m = regex.exec(d)
     d = new Date(pi(m[1]), pi(m[2]) - 1, pi(m[3]), pi(m[4]), pi(m[5]), pi(m[6]))
@@ -116,10 +163,7 @@ window.formatDate = (d) ->
   
   today = new Date()
   delta = today.getTime() - d.getTime()
-  
-  getMidnight = (ago) ->
-    new Date(today.getFullYear(), today.getMonth(), today.getDate() - ago)
-  
+
   if delta < 120000 # 2 minutes
     return "just now"
   else if delta < 3600000 # 60 minutes
@@ -138,20 +182,6 @@ window.formatDate = (d) ->
       minutes = d.getMinutes()
   
     return "#{hours}:#{minutes} #{ampm}"
-  else if getMidnight(1) < d < getMidnight(0)
-    return "yesterday"
-  else if getMidnight(2) < d < getMidnight(1)
-    return '2 days ago'
-    
-  months = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec']
-  numbers = ['th','st','nd','rd','th','th','th','th','th','th']
-  day = d.getDate()
-  month = months[d.getMonth()]
-
-  if 10 <= day <= 20
-    day = day + 'th'
-  else
-    day = day + numbers[(day % 10)]
-
-  "#{month} #{day}, #{d.getYear() + 1900}"
+  
+  formatDate(d)
   
