@@ -1,0 +1,32 @@
+CACHE MANIFEST
+# Cache manifest version 2010.11.1188
+
+images/back_button.png
+images/button.png
+images/check_mark.png
+images/chevron.png
+images/delete.png
+images/more_button.png
+images/no_image.png
+images/search.png
+images/icons/extras.png
+images/icons/lists.png
+images/icons/recipes.png
+
+javascripts/jquery-1.4.3.min.js
+javascripts/mobile.js
+javascripts/sammy-0.6.2.min.js
+javascripts/sammy.tmpl.js
+
+stylesheets/mobile.css
+stylesheets/reset.css
+
+templates/add_extra.jqt
+templates/home.jqt
+templates/login.jqt
+templates/recipe_list.jqt
+
+NETWORK:
+# All URLs that start with the following lines
+# are whitelisted.
+http://mealfire.com/api/v2/
