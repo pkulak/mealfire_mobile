@@ -1,5 +1,6 @@
 window.callAPI = (path, options) ->
   # Show the "Loading..." header.
+  $('#app-loading-header').remove()
   backButton = $('#app-header').find('a.back-button')
   $('#app-header').hide();
   
@@ -26,6 +27,9 @@ window.callAPI = (path, options) ->
 window.Header = {}
   
 window.Header.setTitle = (title, back) ->
+  $('#app-loading-header').remove()
+  $('#app-header').show();
+
   $('#app-header').html $('<h1></h1>').text(title)
   
   if back
