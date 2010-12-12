@@ -1,8 +1,8 @@
 $.fn.quickClick = (callback) ->
   this.each ->
     el = $(this)
-    
-    unless window.Touch
+        
+    unless `'ontouchstart' in document.documentElement`
       el.click(callback)
       return
       
