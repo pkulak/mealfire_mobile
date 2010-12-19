@@ -4,7 +4,9 @@ app.get '#/recipe/:id', (context) ->
 
   callAPI "me/recipes/#{context.params.id}", data: data, success: (recipe) ->
     Header.setTitle recipe.name, '#/recipes'
-    
+    Header.addButton text: "Schedule", click: ->
+      document.location = "/#/recipe/schedule/#{context.params.id}"
+  
     $.each recipe.ingredient_groups, (index, group) ->
       ul = $('<ul/>')
 
