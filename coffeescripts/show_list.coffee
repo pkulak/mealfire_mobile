@@ -1,7 +1,7 @@
 app.get '#/list/:id', (context) ->
   context.app.swap('')
   
-  Header.setTitle("Shopping List", "/#/lists")
+  Header.setTitle("List", "/#/lists")
   Header.addButton text: "Hide Checked", click: ->
     checked = $('li.checked')
     

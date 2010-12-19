@@ -11,7 +11,7 @@ window.callAPI = (path, options) ->
     options.data = $.extend options.data || {}, token: window.token
 
   ajax = $.ajax
-    url: "http://mealfire.com/api/v2/#{path}.jsonp?callback=?"
+    url: "http://localhost:7000/api/v2/#{path}.jsonp?callback=?"
     dataType: 'jsonp'
     data: options.data
     success: (data) ->
