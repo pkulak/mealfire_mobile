@@ -1,9 +1,21 @@
 app.get '#/list/:id', (context) ->
   context.app.swap('')
   
-  callAPI "me/lists/#{context.params.id}", success: (categories) ->
-    Header.setTitle("Shopping List", "/#/lists")
+  Header.setTitle("Shopping List", "/#/lists")
+  Header.addButton text: "Hide Checked", click: ->
+    checked = $('li.checked')
     
+    unless checked.length
+      return alert "Please select at least one item."
+    
+    foods = $.map checked, (c) -> $(c).data('food')
+    foods = $.toJSON(foods)
+    
+    callAPI "me/lists/#{context.params.id}/hide_foods",
+      data: {foods: foods},
+      success: -> checked.slideUp()
+  
+  callAPI "me/lists/#{context.params.id}", success: (categories) ->
     if categories.length == 0
       return context.app.swap('<ul><li class="no-items">There\'s nothing here!</li></ul>')
       
@@ -12,7 +24,9 @@ app.get '#/list/:id', (context) ->
     $.each categories, (i, category) ->
       ul.append($('<li class="sub-heading"/>').text(category.name))
       $.each category.items, (i, item) ->
-        li = $('<li class="checkable"/>').data('id', item.id).text(item.string)
+        li = $('<li class="checkable"/>').data('id', item.id)
+        li.append(item.string)
+        li.data('food', item.food)
         ul.append(li)
         li.quickClick ->
           if $(this).hasClass("checked")
