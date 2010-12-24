@@ -5,7 +5,13 @@ app.get '#/calendar', (context) ->
 
   callAPI 'me/calendar', success: (days) ->
     calendar_days = days
-    Header.addButton text: "Make List", click: -> window.location = '#/make_list'
+    Header.addButton text: "Make List", click: ->
+      # No need to make the person select the only day.
+      if days.length == 1
+        callAPI 'me/lists/create', data: {days: days[0].day}, success: (list) ->
+          document.location = "/#/list/#{list.id}"
+      else
+        window.location = '#/make_list'
   
     ul = $('<ul></ul>')
     last = null
@@ -33,18 +39,15 @@ app.get '#/make_list', (context) ->
   
   $.each calendar_days, (i, day) ->
     unless day.day == last
-      li = $('<li/>')
-        .append($('<input type="checkbox" style="margin-right:10px;"/>')
-          .attr('name', day.day)
-          .attr('id', day.day))
-        .append(
-          $('<label/>')
-            .attr('for', day.day)
-            .text(formatDate(day.day)))
+      li = $('<li class="checkable"/>')
+        .data('day', day.day)
+        .text(formatDate(day.day))
       
-      li.quickClick (e) ->
-        $(this).find('input').attr('checked', !$(this).find('input').is(':checked'))
-        e.preventDefault()
+      li.quickClick ->
+        if $(this).hasClass("checked")
+          $(this).removeClass("checked")
+        else
+          $(this).addClass("checked")
       
       ul.append(li)
     
@@ -55,12 +58,12 @@ app.get '#/make_list', (context) ->
   context.$element().append(submit)
   
   submit.click ->
-    days = $('input:checked')
+    days = $('li.checked')
     
     unless days.length
       return alert("Please select at least one day to create a recipe for.")
-    
-    days = $.map days, (day, i) -> day.id
+
+    days = $.map days, (day, i) -> $(day).data('day')
     days = days.join(',')
     
     callAPI 'me/lists/create', data: {days: days}, success: (list) ->
