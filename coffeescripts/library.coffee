@@ -12,7 +12,7 @@ window.callAPI = (path, options) ->
 
   ajaxOptions =
     data: options.data
-    url: "http://mealfire.com/api/v2/#{path}.json"
+    url: "http://m.mealfire.com/api/v2/#{path}.json"
     success: (data) ->
       # Put back the normal header.
       $('#app-loading-header').remove()
@@ -25,7 +25,7 @@ window.callAPI = (path, options) ->
   
   # Only use JSONP for testing
   if window.location.hostname == 'localhost'
-    ajaxOptions.url += "p?callback=?"
+    ajaxOptions.url = "http://mealfire.com/api/v2/#{path}.jsonp?callback=?"
     ajaxOptions.dataType = 'jsonp'
 
   ajax = $.ajax(ajaxOptions)
