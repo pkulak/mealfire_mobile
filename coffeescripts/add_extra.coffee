@@ -13,3 +13,5 @@ app.post '#/add_extra', (context) ->
       context.redirect('#/extras')
     error: (message) ->
       alert("There was an error adding your item.")
+  
+  false
