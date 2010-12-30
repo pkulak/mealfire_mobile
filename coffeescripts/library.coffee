@@ -10,7 +10,7 @@ window.callAPI = (path, options) ->
   if window.token
     options.data = $.extend options.data || {}, token: window.token
 
-  ajaxOptions =
+  $.ajax
     data: options.data
     url: "http://m.mealfire.com/api/v2/#{path}.json"
     success: (data) ->
@@ -22,13 +22,6 @@ window.callAPI = (path, options) ->
         options.error(data[1]) if options.error
       else
         options.success(data[1]) if options.success
-  
-  # Only use JSONP for testing
-  if window.location.hostname == 'localhost'
-    ajaxOptions.url = "http://mealfire.com/api/v2/#{path}.jsonp?callback=?"
-    ajaxOptions.dataType = 'jsonp'
-
-  ajax = $.ajax(ajaxOptions)
 
 window.Header = {}
 backLocation = null
