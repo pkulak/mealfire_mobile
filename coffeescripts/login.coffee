@@ -11,3 +11,5 @@ app.post '#/login', (context) ->
       context.redirect('#/')
     error: (message) ->
       alert(message)
+  
+  false
