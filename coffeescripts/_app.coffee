@@ -3,11 +3,11 @@ window.app = $.sammy ->
   this.use(Sammy.Tmpl, 'jqt')
 
 $ ->
+  app.run('#/')
+
   window.token = localStorage.getItem('token')
 
   if token
     callAPI 'validate',
       success: -> app.run('#/')
       error: -> app.run('#/login')
-  else
-    app.run('#/login')
