@@ -9,5 +9,6 @@ $ ->
 
   if token
     callAPI 'validate',
-      success: -> app.run('#/')
       error: -> app.run('#/login')
+  else
+    app.run('#/login')
