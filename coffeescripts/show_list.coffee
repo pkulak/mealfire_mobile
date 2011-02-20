@@ -23,10 +23,10 @@ app.get '#/list/:id', (context) ->
     
     $.each categories, (i, category) ->
       ul.append($('<li class="sub-heading"/>').text(category.name))
-      $.each category.items, (i, item) ->
-        li = $('<li class="checkable"/>').data('id', item.id)
-        li.append(item.string)
-        li.data('food', item.food)
+      $.each category.ingredients, (i, ingredient) ->
+        li = $('<li class="checkable"/>').data('id', ingredient.id)
+        li.append(ingredient.string)
+        li.data('food', ingredient.food)
         ul.append(li)
         li.quickClick ->
           if $(this).hasClass("checked")
