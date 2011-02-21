@@ -15,13 +15,13 @@ app.get '#/list/:id', (context) ->
       data: {foods: foods},
       success: -> checked.slideUp()
   
-  callAPI "me/lists/#{context.params.id}", success: (categories) ->
-    if categories.length == 0
+  callAPI "me/lists/#{context.params.id}", success: (list) ->
+    if list.ingredient_groups.length == 0
       return context.app.swap('<ul><li class="no-items">There\'s nothing here!</li></ul>')
       
     ul = $('<ul></ul>')
     
-    $.each categories, (i, category) ->
+    $.each list.ingredient_groups, (i, category) ->
       ul.append($('<li class="sub-heading"/>').text(category.name))
       $.each category.ingredients, (i, ingredient) ->
         li = $('<li class="checkable"/>').data('id', ingredient.id)
